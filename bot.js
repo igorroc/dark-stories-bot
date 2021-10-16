@@ -81,6 +81,14 @@ bot.on("message", async (message) => {
 		)
 	}
 
+	if (comando == "enviar" && message.channel.type != "dm") {
+		let embed = new Discord.MessageEmbed().setDescription(
+			"Esse comando deve ser feito via [DM](https://discord.com/channels/@me/898993063765082173)"
+		)
+		message.reply(embed)
+		return
+	}
+
 	// ! Run the command
 	let commandfile =
 		bot.commands.get(comando) || bot.commands.get(bot.aliases.get(comando)) // Pega o comando escrito no arquivo de comandos
