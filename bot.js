@@ -42,7 +42,7 @@ bot.once("ready", () => {
 
 	if (config.status == "on") {
 		bot.user.setStatus("online")
-		bot.user.setActivity(`| dh!help para ajuda`, {
+		bot.user.setActivity(`| ${config.prefix}help para ajuda`, {
 			type: "PLAYING",
 		})
 	} else {

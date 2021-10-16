@@ -1,5 +1,8 @@
 const Discord = require("discord.js")
 const fetch = require("node-fetch")
+let config = require("../config.json")
+let pr = config.prefix
+
 
 module.exports.run = async (bot, message, args) => {
 	console.log(
@@ -18,16 +21,16 @@ module.exports.run = async (bot, message, args) => {
 			.setDescription(jsonJogo.description)
 			.setColor(difficultyColor[jsonJogo.difficulty - 1])
 			.setImage(
-				`https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg`
+				`https://raw.githubusercontent.com/igorroc/dark-stories/master/assets/${jsonJogo.image}`
 			)
-			.setFooter(`Mestre: ${message.author || message.author.user || message.author.username}`)
+			.setFooter(`Narrador(a): ${message.author.tag}`)
 
 		const resposta = new Discord.MessageEmbed()
 			.setTitle(`#${jsonJogo.id} - ${jsonJogo.title}`)
 			.setDescription(jsonJogo.description)
 			.setColor(difficultyColor[jsonJogo.difficulty - 1])
 			.setImage(
-				`https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg`
+				`https://raw.githubusercontent.com/igorroc/dark-stories/master/assets/${jsonJogo.image}`
 			)
 			.addField("Resposta:", jsonJogo.answer)
 			.setFooter(`Dificuldade: ${jsonJogo.difficulty}/3`)
@@ -68,8 +71,8 @@ async function getJogo(file) {
 
 module.exports.config = {
 	name: "play",
-	description: "Inicia um jogo com você como mestre!",
-	usage: "dh!play (opções)\ndh!play texto",
+	description: "Inicia um jogo com você como Narrador(a)!",
+	usage: `${pr}play (opções)\n${pr}play texto`,
 	accessableby: "Membros",
 	aliases: ["start", "jogar"],
 }

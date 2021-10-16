@@ -19,9 +19,6 @@ module.exports.run = async (bot, message, args) => {
 			var SHembed = new Discord.MessageEmbed()
 				.setColor("#64B3E3")
 				.setTitle(`\\🔧 Comando: ${command.config.name}`)
-				.setURL(
-					`https://igorroc.github.io/ProcrastinaNao/comandos.html?comando=${command.config.name}`
-				)
 				.addFields(
 					{
 						name: "Descrição",
@@ -69,7 +66,7 @@ module.exports.run = async (bot, message, args) => {
 module.exports.config = {
 	name: "help",
 	description: "Resumo dos comandos do servidor!",
-	usage: ".help",
+	usage: `${prefix}help`,
 	accessableby: "Membros",
 	aliases: ["h", "commands", "comando", "comandos", "ajuda"],
 }

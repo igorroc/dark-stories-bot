@@ -1,4 +1,6 @@
 const Discord = require("discord.js")
+let config = require("../config.json")
+let pr = config.prefix
 
 module.exports.run = async (bot, message, args) => {
 	console.log(
@@ -36,7 +38,7 @@ module.exports.run = async (bot, message, args) => {
 module.exports.config = {
 	name: "ping",
 	description: "Informa a latência atual da conexão bot-servidor!",
-	usage: ".ping",
+	usage: `${pr}ping`,
 	accessableby: "Membros",
 	aliases: ["latencia", "ms"],
 }
