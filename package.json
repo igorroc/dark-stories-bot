@@ -1,0 +1,23 @@
+{
+  "name": "darkstories",
+  "version": "1.0.0",
+  "description": "Discord Bot",
+  "main": "bot.js",
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "fs": "0.0.1-security"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igorroc/dark-stories-bot.git"
+  },
+  "author": "Igor Rocha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/igorroc/dark-stories-bot/issues"
+  },
+  "homepage": "https://github.com/igorroc/dark-stories-bot#readme"
+}

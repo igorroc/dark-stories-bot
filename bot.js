@@ -5,8 +5,6 @@ bot.commands = new Discord.Collection()
 bot.aliases = new Discord.Collection()
 let config = require("./config.json")
 
-const MENSAGEM_REINICIO = false
-
 fs.readdir("./commands/", (err, files) => {
 	if (err) console.log(err)
 
@@ -59,56 +57,11 @@ bot.on("message", async (message) => {
 	// ! Return if the author is a bot
 	if (message.author.bot) return
 
-	// ! Restart the config file
-	delete require.cache[require.resolve("./config.json")]
-	let config = require("./config.json")
-
 	// ? Cleans the message
 	let prefix = config.prefix
 	let messageArray = message.content.split(" ")
 	let comando = messageArray[0].slice(prefix.length)
 	let args = messageArray.slice(1)
-
-	// ! Return a message to ModChannel when someone sends a DM
-	if (message.channel.type == "dm") {
-		let anexo = message.attachments.first()?.attachment
-		const embed = new Discord.MessageEmbed()
-			.setColor("#64B3E3")
-			.setTitle("\\💬 Mensagem recebida")
-			.setDescription(
-				anexo
-					? `[anexo](${anexo.toString()})${anexo
-							.toString()
-							.slice(-4)}`
-					: message.content.length < 1024
-					? message.content
-					: message.content.slice(0, 1015) + " [...]"
-			)
-			.addFields({
-				name: `Enviado por:`,
-				value: message.author || message.author.username,
-				inline: false,
-			})
-			.setImage(
-				anexo
-					? anexo.toString().endsWith(".png")
-						? anexo
-						: null
-					: null
-			)
-			.setTimestamp()
-
-		return bot.channels.cache.get("722274694535053317").send(embed)
-	}
-
-	let emojiAgree = bot.emojis.cache.get("892486327080218684"),
-		emojiDisagree = bot.emojis.cache.get("892486199233618041")
-
-	if(message.channel.id == "696458021500354581"){ // Suggestion channel
-		await message.react(emojiDisagree)
-		await message.react(emojiAgree)
-		console.log("New suggestion")
-	}
 
 	// ! Verify the prefix
 	if (!message.content.startsWith(prefix)) return
@@ -128,19 +81,6 @@ bot.on("message", async (message) => {
 		)
 	}
 
-	// ! Retorna, caso o usuário esteja preso
-	if (message.member.roles.cache.find((r) => r.id == "842189200337666058")) {
-		const embed = new Discord.MessageEmbed()
-			.setColor("#ff0000")
-			.setTitle("\\🚫 Erro")
-			.setDescription(
-				"Você está **preso**, e **não** pode mais enviar comandos!"
-			)
-			.setTimestamp()
-
-		return message.reply(embed)
-	}
-
 	// ! Run the command
 	let commandfile =
 		bot.commands.get(comando) || bot.commands.get(bot.aliases.get(comando)) // Pega o comando escrito no arquivo de comandos
@@ -151,8 +91,6 @@ bot.on("message", async (message) => {
 		message.react(`❓`)
 		console.log(`\n■▶ [LOGS] ⇥ Comando '${comando}' não encontrado`)
 	}
-
 })
 
-let config = require("./config.json")
 bot.login(config.token)
